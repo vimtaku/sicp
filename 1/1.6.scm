@@ -7,8 +7,8 @@
  (sqrt-iter 1.0 x))
 
 (define (good-enough? guess x)
- ;(< (my_display (abs (- (square guess) x))) 0.001))
- (< (abs (- (square guess) x)) 0.001))
+ (= guess (improve guess x) )
+)
 
 (define (average x y)
   (/ (+ x y) 2)
@@ -20,7 +20,7 @@
 
 (define (sqrt-iter guess x)
  ;(if (my_display (good-enough? guess x)) (my_display guess)
- (new-if (my_display 1 (good-enough? guess x))
+ (if (my_display 1 (good-enough? guess x))
          (my_display 2 guess)
          (my_display 3 (my_display 5 (sqrt-iter (my_display 4 (improve guess x)) x)) )
  )
@@ -44,16 +44,21 @@ x)
 
 
 ;(display (sqrt 3))
-(sqrt 3)
+;(sqrt 2)
+;(sqrt 3e13)
+;(sqrt 0.001)
+;(sqrt 2)
+
+(sqrt 0.00000000000000000000000000000000001)
 
 
-回答)
-new-if は意図から見ると、 predicate が false の時に評価しないつもりであるが、
-実際には new-if が operator のときに predicate, then-clause, else-clause の順に
-評価されてしまう。
-その証拠に、以下の実行結果の2行目では, 2:1.0 が出力されていることから
-guess が評価されてしまっていることがわかる。
-
+; 回答)
+; new-if は意図から見ると、 predicate が false の時に評価しないつもりであるが、
+; 実際には new-if が operator のときに predicate, then-clause, else-clause の順に
+; 評価されてしまう。
+; その証拠に、以下の実行結果の2行目では, 2:1.0 が出力されていることから
+; guess が評価されてしまっていることがわかる。
+;
 
 
 

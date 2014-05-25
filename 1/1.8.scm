@@ -6,9 +6,8 @@
  (* (square x) x)
 )
 
-(define (good-enough? previous guess x)
- (cond ((= (- previous guess) 0) #f)
-       ((< (abs (- previous guess) ) 0.00001) #t)
+(define (good-enough? guess x)
+ (cond ((= (improve_cubic guess x) guess) #t)
        (else #f)
  )
 )
@@ -21,16 +20,18 @@
  (/ (+ (/ x (square guess)) (double guess)) 3)
 )
 
-(define (cubic_root previous guess x)
-  (if (good-enough? previous guess x) guess
-    (cubic_root guess (improve_cubic guess x) x)
+(define (cubic_root guess x)
+  (if (good-enough? guess x)
+       guess
+      (cubic_root (improve_cubic guess x) x)
   )
 )
 
 (define (cbrt x)
- (cubic_root 1.0 1.0 x)
+ (cubic_root 1.0 x)
 )
 
-(display (cbrt 27))
-(display (cbrt 128))
+;(display (cbrt 27))
+(display (cbrt 64))
+;(display (cbrt 128))
 

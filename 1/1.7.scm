@@ -3,11 +3,10 @@
 )
 
 (define (sqrt x)
- (sqrt-iter 1.0 1.0 x))
+ (sqrt-iter 1.0 x))
 
-(define (good-enough? previous guess x)
- (cond ((= (- previous guess) 0) #f)
-       ((< (abs (- previous guess)) 0.00001) #t)
+(define (good-enough? guess x)
+ (cond ((= (improve guess x) guess) #t)
        (else #f)
  )
 )
@@ -20,9 +19,10 @@
  (average guess (/ x guess) )
 )
 
-(define (sqrt-iter previous guess x)
- (if (my_display "good enough?" (good-enough? previous guess x)) guess
-    (sqrt-iter guess (my_display "improve guess is " (improve guess x)) x)
+(define (sqrt-iter guess x)
+ (if (good-enough? guess x)
+     guess
+     (sqrt-iter (improve guess x) x)
  )
 )
 
@@ -34,10 +34,11 @@
 x)
 
 ;(display (sqrt 2) )
-;(display (sqrt 90000000000000) )
+(display (sqrt 2e306) )
 ;(display (sqrt 0.0001) )
-(display (sqrt 0.000001) )
+;(display (sqrt 0.000001) )
 
+;(display (sqrt 3e13) )
 
 
 ; gosh> (sqrt 90000000000000)

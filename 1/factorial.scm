@@ -3,9 +3,9 @@
 ;   (if (= n 1)
 ;     1
 ;     (* n (factorial (- n 1)))))
-;
-; (display (factorial 100000))
-;
+
+;(display (factorial 100000))
+
 
 
 
@@ -19,4 +19,5 @@
                  (+ counter 1)
                  max-count)))
 
-(display (factorial 5))
+;(display (factorial 5))
+(display (factorial 100000))
