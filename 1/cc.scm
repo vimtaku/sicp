@@ -66,7 +66,7 @@ x)
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
 
-(display (count-change 10))
+(display (count-change 400))
 
 ; 1..4 -> 1(1)
 ; 5 -> 2(1,5)
