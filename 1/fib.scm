@@ -8,7 +8,7 @@
  )
 )
 
-(display (fib 3))
+(display (fib 6))
 
 
 ; (define (fib n)
