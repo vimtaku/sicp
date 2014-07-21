@@ -36,11 +36,13 @@
   )
 )
 
-(display (integral-simpson cube 0 1 100) )
+(display (integral-simpson cube 0 1.0 10) )
 (newline)
-(display (integral-simpson cube 0 1 1000) )
-(newline)
-(display (integral-simpson cube 0 1 1000000) )
+(display (integral-simpson cube 0 1.0 100) )
+; (newline)
+; (display (integral-simpson cube 0 1.0 1000) )
+; (newline)
+;(display (integral-simpson cube 0 1 1000000) )
 ;両方共 0.25 となった。
 ;integral と比べてはっきりと割りきれている
 ; 最後のやつは 0.24999999999999997
