@@ -26,7 +26,7 @@
 
 (display (fixed-point
  (lambda (x) (/(log 1000) (log x)))
- 100
+ 10
  )
 )
 
@@ -41,11 +41,11 @@
 
 
 
-; (display (fixed-point
-;  (lambda (x) (/ (+ (* x (log x)) (log 1000)) (* 2 (log x))) )
-;  100
-;  )
-; )
+(display (fixed-point
+ (lambda (x) (/ (+ (* x (log x)) (log 1000)) (* 2 (log x))) )
+ 100
+ )
+)
 
 ; 初期予測値を 10 としたとき
 ; 答えは 4.555536206185039

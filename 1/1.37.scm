@@ -1,6 +1,6 @@
 
 
-;; 再帰的プロセス
+; ; 再帰的プロセス
 ; (define (cont-frac n d k)
 ;   (if (= k 0)
 ;     0
