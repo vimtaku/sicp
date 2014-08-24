@@ -1,6 +1,11 @@
 
 (define zero (lambda (f) (lambda (x) x)))
 
+
+; add 1 0
+; (+ 1 0)
+
+
 (define (add-1 n)
   (lambda (f) (lambda (x) (f ((n f) x)))))
 
@@ -18,7 +23,7 @@
 
 
 (define one
-  (lambda (f) (lambda (x) (f (x))))
+  (lambda (f) (lambda (x) (f x)))
 )
 
 ;; one に add-1 すると two が導ける
@@ -40,25 +45,47 @@
 
 
 (define two
-  (lambda (f) (lambda (x) (f (f (x)) )))
+  (lambda (f) (lambda (x) (f (f x) )))
 )
-
-
 
 (define (add-1 n)
   (lambda (f) (lambda (x) (f ((n f) x))))
 )
 
-
-
-;; 思考過程
-(define (moge a b)
- ( (lambda (x y) (+ x (y))) a b)
+(define (inc x)
+  (+ x 1)
 )
 
-(display (moge 1 (lambda () 2) ) )
+
+(display (((add-1 zero) inc) 0) )
+(newline)
+(display (((add-1 one) inc) 0) )
+(newline)
+(display (((add-1 two) inc) 0) )
 
 
+
+(define (add-2 n)
+  (lambda (f) (lambda (x) (f (f ((n f) x))))))
+
+
+;(display (((add-2 two) inc) 0) )
+
+(define (plus a b)
+    (
+    lambda (f) (
+      lambda (x) ( (a f) ((b f) x) )
+    )
+    )
+)
+
+;(display (two two) )
+;(display (( (two two) inc) 0) )
+
+
+(display (((plus two one) inc) 0))
+
+(display (((plus two two) inc) 0))
 
 
 
