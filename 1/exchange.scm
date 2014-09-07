@@ -25,4 +25,19 @@
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
 
-(display (count-change 400))
+;(define uk-coins (list 100 50 20 10 5 2 1 0.5))
+; uk
+; (define (first-denomination kinds-of-coins)
+;   (cond ((= kinds-of-coins 1) 0.5)
+;         ((= kinds-of-coins 2) 1)
+;         ((= kinds-of-coins 3) 2)
+;         ((= kinds-of-coins 4) 5)
+;         ((= kinds-of-coins 5) 10)
+;         ((= kinds-of-coins 6) 20)
+;         ((= kinds-of-coins 7) 50)
+;         ((= kinds-of-coins 8) 100)
+;         )
+;   )
+
+
+(display (count-change 100))
