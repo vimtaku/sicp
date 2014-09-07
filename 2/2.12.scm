@@ -33,7 +33,7 @@
        (c (center i))
        (n (width i))
       )
-  (/ (* n 100) c)
+  (abs (/ (* n 100) c))
  )
 )
 

@@ -34,6 +34,8 @@
     (display (percent (div-interval sample-interval-big sample-interval-big)))
     (newline)
     ; A/B
+    (display "mogeeee")
+    (newline)
     (display (div-interval sample-interval-big sample-interval-big2))
     (newline)
     (display "A/B percent is ")

@@ -168,7 +168,6 @@
                  )
                  ((and (> bound1 bound2) (> bound3 bound4))
                      (if (> bound1 bound4) (make-interval bound4 bound1)
-                                          (display "moge?")
                      )
                  )
                  ((and (< bound1 bound2) (< bound3 bound4))
