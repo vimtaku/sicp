@@ -3,18 +3,12 @@
 ;引数として(リストとして表現されている)木をとり, その要素が, 木のすべての葉を, 左から右の順に並べたものであるリストを返す手続き fringeを書け. 例えば
 
 
-
 (define (fringe li)
-
- (define (iter li prsv)
   (cond
-    ((null? li) prsv)
-    ((not (pair? li)) (cons li prsv))
-    (else (append (iter (car li) prsv) (iter (cdr li) prsv)))
+    ((null? li) (list))
+    ((not (pair? li)) (list li))
+    (else (append (fringe (car li) ) (fringe (cdr li) )))
   )
- )
-
- (iter li (list))
 )
 
 ; (define x (list (list 1 2) (list 3 4)))
