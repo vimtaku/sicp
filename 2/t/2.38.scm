@@ -18,11 +18,17 @@
 
 
    ; 可換性を持ってれば おなじになる
+   ; -> これは、交換法則のほうが答え。
    (test-equal 6 (fold-right * 1 (list 1 2 3)))
    (test-equal 6 (fold-left * 1 (list 1 2 3)))
    (test-equal 7 (fold-right + 1 (list 1 2 3)))
    (test-equal 7 (fold-left + 1 (list 1 2 3)))
    (test-equal 1 (fold-right - 1 (list 1 2 3)))
    (test-equal -5 (fold-left - 1 (list 1 2 3)))
+
+   ;(op a (op b c) (op (op a b) c)
+
+
+
 
 (test-end title)

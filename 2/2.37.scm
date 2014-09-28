@@ -7,10 +7,11 @@
 ; ;と定義出来る.17 他のマトリクス演算を計算する次の手続きの欠けた式を補え. (手続きaccumulate-nは問題2.36で定義してある.)
 
 (define (matrix-*-vector m v)
-  (map
-   (lambda (x)
-     (accumulate + 0 (accumulate-n * 1 (list x v)))
-   ) m)
+   (map (lambda (y) (dot-product y v)) m)
+  ; (map
+  ;  (lambda (x)
+  ;    (accumulate + 0 (accumulate-n * 1 (list x v)))
+  ;  ) m)
 )
 
 
@@ -21,7 +22,8 @@
 (define (matrix-*-matrix m n)
   (let ((cols (transpose n)))
     (map (lambda (x)
-           (map (lambda (y) (dot-product x y)) cols)
+           (matrix-*-vector cols x)
+           ;(map (lambda (y) (dot-product x y)) cols)
          ) m)
   )
 )

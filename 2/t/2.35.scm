@@ -18,7 +18,7 @@
     (define tree (list))
     (test-equal 0 (count-leaves tree))
 
-    (define tree (list 1 2 9 (list 3 4 8) (list 10 5 6) 7))
+    (define tree (list 1 2 9 (list 3 4 8) (list) (list 10 5 6) 7))
     (test-equal 10 (count-leaves tree))
 
 

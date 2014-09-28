@@ -12,7 +12,7 @@
 (define (reverse sequence)
  ; y に sequence の値が一つづつ入ってくる(順に)。 x は保存変数
   (fold-left (lambda (x y)
-              (display x)
-              (display y)
+              ; (display x)
+              ; (display y)
               (cons y x) ) (list) sequence))
 
