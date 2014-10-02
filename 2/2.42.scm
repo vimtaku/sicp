@@ -13,10 +13,21 @@
   )
 )
 
+(define (naname-same? pair pairb)
+  (if (null? pairb)
+      #f
+      (= (abs (- (car pair) (car pairb)))
+         (abs (- (cadr pair) (cadr pairb)))
+      )
+  )
+)
+
+
 (define (safe? k positions)
   (define (find-same new li)
     (cond ((null? li) #t)
           ((row-or-col-same? new (car li)) #f)
+          ((naname-same? new (car li)) #f)
           (else (find-same new (cdr li)))
     )
   )
