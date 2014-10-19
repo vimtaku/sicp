@@ -1,5 +1,4 @@
 
-
 (define border
   (let ((len 0.9))
       (segments->painter (list
@@ -21,14 +20,14 @@
 )
 
 (define diamond
-  (let ((len 0.9)
-        (half (/ 0.9 2))
+  (let ((len 0.99)
+        (half 0.50)
        )
       (segments->painter (list
-        (make-segment (make-vect 0.0 half) (make-vect half len))
+        (make-segment (make-vect 0.01 half) (make-vect half len))
         (make-segment (make-vect half len) (make-vect len half))
-        (make-segment (make-vect len half) (make-vect half 0.0))
-        (make-segment (make-vect half 0.0) (make-vect 0.0 half))
+        (make-segment (make-vect len half) (make-vect half 0.01))
+        (make-segment (make-vect half 0.01) (make-vect 0.01 half))
         ))
   )
 )
