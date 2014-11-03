@@ -9,6 +9,7 @@
 
 (define (equal? f-list s-list)
   (cond ((and (not (pair? f-list)) (not (pair? s-list)) (eq? f-list s-list)) #t)
+        (or (not (pair? f-list)) (not (pair? s-list)) #f)
         ((and (equal? (car a) (car b)) (equal? (cdr a) (cdr b))) #t)
         (else #f)
   )

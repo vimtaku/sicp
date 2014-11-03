@@ -36,12 +36,36 @@
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
 (define (sum? x)
   (and (pair? x) (eq? (car x) '+)))
-(define (addend s) (cadr s))
-(define (augend s) (caddr s))
+
+(define (addend s)
+  (cond ((not (pair? s)) 0)
+        ((and (pair? s) (= 1 (length s)) (variable? (car s))) 0)
+        (else (cadr s) )
+  )
+)
+
+(define (augend s)
+  (cond ((not (pair? s)) 0)
+        ((and (pair? s) (= 1 (length s)) (variable? (car s))) 0)
+        (else (append '(+) (cddr s)) )
+  )
+)
+
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
-(define (multiplier p) (cadr p))
-(define (multiplicand p) (caddr p))
+
+(define (multiplier p)
+  (cond ((not (pair? p)) 1)
+        ((and (pair? p) (= 1 (length p)) (variable? (car p))) 1)
+        (else (cadr p) )
+  )
+)
+(define (multiplicand p)
+  (cond ((not (pair? p)) 1)
+        ((and (pair? p) (= 1 (length p)) (variable? (car p))) 1)
+        (else (append '(*) (cddr p)) )
+  )
+)
 
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
@@ -57,6 +81,8 @@
         ((=number? m1 1) m2)
         ((=number? m2 1) m1)
         ((and (number? m1) (number? m2)) (* m1 m2))
+        ((and (product? m1) (= (length m1) 1)) m2)
+        ((and (product? m2) (= (length m2) 1)) m1)
         (else (list '* m1 m2))))
 
 ; (p (deriv '(+ x 3) 'x))
@@ -78,6 +104,6 @@
 (define (base p) (cadr p))
 (define (exponentiation p) (caddr p))
 
-(p (deriv '(** x 3) 'x) )
-(p (deriv '(** x 2) 'x) )
+; (p (deriv '(** x 3) 'x) )
+; (p (deriv '(** x 2) 'x) )
 

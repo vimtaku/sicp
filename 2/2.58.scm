@@ -1,4 +1,12 @@
 
+; 問題 2.58
+;
+; 微分プログラムを修正し, 前置演算子でなく+や*が中置きになっている通常の数学の式に動作させたいと思う. 微分のプログラムは抽象データを使って定義してあるので, 微分プログラムが操作する代数式の表現を定義する述語, 選択子, 構成子だけを変更するだけで, 式の別の表現形で動作するように出来る.
+;
+; a. (x + (3 * (x + (y + 2))))のような中置き表現の代数式を微分するにはどうしたらよいかを示せ. 作業を単純にするため, +や*は常に二つの項をとり, 式は完全にかっこで囲まれていると仮定せよ.
+
+
+
 (define (p x)
   (display x)
   (newline)
@@ -17,17 +25,6 @@
                          (deriv (multiplicand exp) var))
            (make-product (deriv (multiplier exp) var)
                          (multiplicand exp))))
-        ((exponentiation? exp)
-           (make-product
-             ; nu^(n-1)
-             (make-product
-               (exponentiation exp)
-               (make-exponentiation (base exp) (- (exponentiation exp) 1))
-             )
-             ; (du/dx)
-             (deriv (base exp) var)
-           )
-        )
         (else
          (error "unknown expression type -- DERIV" exp))))
 
@@ -35,19 +32,19 @@
 (define (same-variable? v1 v2)
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
 (define (sum? x)
-  (and (pair? x) (eq? (car x) '+)))
-(define (addend s) (cadr s))
+  (and (pair? x) (eq? (cadr x) '+)))
+(define (addend s) (car s))
 (define (augend s) (caddr s))
 (define (product? x)
-  (and (pair? x) (eq? (car x) '*)))
-(define (multiplier p) (cadr p))
+  (and (pair? x) (eq? (cadr x) '*)))
+(define (multiplier p) (car p))
 (define (multiplicand p) (caddr p))
 
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
         ((=number? a2 0) a1)
         ((and (number? a1) (number? a2)) (+ a1 a2))
-        (else (list '+ a1 a2))))
+        (else (list a1 '+ a2))))
 
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
@@ -57,27 +54,24 @@
         ((=number? m1 1) m2)
         ((=number? m2 1) m1)
         ((and (number? m1) (number? m2)) (* m1 m2))
-        (else (list '* m1 m2))))
+        (else (list m1 '* m2))))
 
-; (p (deriv '(+ x 3) 'x))
+
+; a
+; データの取り方と、 make-product の 最後に返す形を変えれば良い
+
 ; (p (deriv '(* x y) 'x))
 ; (p (deriv '(* (* x y) (+ x 3)) 'x))
+; (p (deriv '(x + 3) 'x))
+;(p (deriv '(x + (3 * (x + (y + 2)))) 'x))
+;(p (deriv '(x * y) 'x))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; (p (deriv '((x * y) * (x + 3)) 'x))
+; (p (deriv '((x * y) * (x + 3)) 'x))
 
-(define (exponentiation? x)
-  (and (pair? x) (eq? (car x) '**))
-)
+;(p (deriv '(x * y) 'x))
 
-(define (make-exponentiation b e)
-  (cond ((=number? e 0) 1)
-        ((=number? e 1) b)
-        (else (list '** b e))
-  )
-)
-(define (base p) (cadr p))
-(define (exponentiation p) (caddr p))
+(p (deriv '((x * 2) + 3) 'x))
 
-(p (deriv '(** x 3) 'x) )
-(p (deriv '(** x 2) 'x) )
+(p (deriv '(x + (3 * (x + (y + 2)))) 'x) )
 
