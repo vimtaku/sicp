@@ -18,9 +18,9 @@
     (define set1 (list->tree (list 1 2 3 4 5)))
     (define set2 (list->tree (list 3 4 5)))
 
-    (display (union-set set1 set2))
-
-
+; (display (entry set1))
+; (display (list->tree ()))
+    (union-set set1 set2)
 
 
 (test-end title)

@@ -57,3 +57,71 @@
                       remaining-elts))))))))
 
 
+; 問題2.63と2.64の結果を使い, (釣合った)二進木として実装されている集合のunion-setとintersection-setを&Theta(n)で実装せよ.
+
+
+
+(define (union-set2 set1 set2)
+  (cond ((null? set1) set2)
+        ((null? set2) set1)
+        (else
+          (let ((x1 (car set1)) (x2 (car set2)))
+            (cond ((= x1 x2)
+                   (cons x1
+                         (union-set2 (cdr set1)
+                                           (cdr set2))))
+                  ((< x1 x2)
+                   (cons x1 (union-set2 (cdr set1) set2)))
+                  ((< x2 x1)
+                   (cons x2 (union-set2 set1 (cdr set2))))
+            )
+          )
+        )
+  )
+)
+
+(define (intersection-set2 set1 set2)
+  (cond ((null? set1) '())
+        ((null? set2) '())
+        (else
+          (let ((x1 (car set1)) (x2 (car set2)))
+            (cond ((= x1 x2)
+                   (cons x1
+                         (intersection-set2 (cdr set1)
+                                           (cdr set2))))
+                  ((< x1 x2)
+                   (intersection-set2 (cdr set1) set2))
+                  ((< x2 x1)
+                   (intersection-set2 set1 (cdr set2))
+                   )
+            )
+          )
+        )
+  )
+)
+
+(define (union-set set1 set2)
+  (let ((list1 (tree->list-2 set1))
+        (list2 (tree->list-2 set2))
+       )
+       (list->tree (union-set2 list1 list2))
+  )
+)
+
+(define (intersection-set set1 set2)
+  (let (
+        (list1 (tree->list-2 set1))
+        (list2 (tree->list-2 set2))
+       )
+       (list->tree (intersection-set2 list1 list2))
+  )
+)
+
+
+(define set1 (list->tree (list 2 3)))
+(define set2 (list->tree (list 2 3 4 5 6)))
+; (display (union-set set1 set2))
+; ; (newline)
+(display (intersection-set set1 set2))
+
+(define pairs '((A 4) (B 2) (C 1) (D 1)))
